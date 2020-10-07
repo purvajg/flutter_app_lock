@@ -92,15 +92,16 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
-      navigatorKey: _navigatorKey,
-      routes: {
-        '/lock-screen': (context) => this._lockScreen,
-        '/unlocked': (context) =>
-            this.widget.builder(ModalRoute.of(context).settings.arguments)
-      },
-    );
+    return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+//    return MaterialApp(
+//      home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
+//      navigatorKey: _navigatorKey,
+//      routes: {
+//        '/lock-screen': (context) => this._lockScreen,
+//        '/unlocked': (context) =>
+//            this.widget.builder(ModalRoute.of(context).settings.arguments)
+//      },
+//    );
   }
 
   Widget get _lockScreen {
@@ -162,8 +163,9 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   void _didUnlockOnAppLaunch(Object args) {
     this._didUnlockForAppLaunch = true;
-    _navigatorKey.currentState
-        .pushReplacementNamed('/unlocked', arguments: args);
+    this.widget.builder(ModalRoute.of(context).settings.arguments);
+//    _navigatorKey.currentState
+//        .pushReplacementNamed('/unlocked', arguments: args);
   }
 
   void _didUnlockOnAppPaused() {
