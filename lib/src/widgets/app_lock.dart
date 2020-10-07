@@ -50,6 +50,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   bool _enabled;
 
   Timer _backgroundLockLatencyTimer;
+  Map<String, WidgetBuilder> routes = new Map();
 
   @override
   void initState() {
@@ -92,7 +93,8 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+    return main();
+    //return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
 //    return MaterialApp(
 //      home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
 //      navigatorKey: _navigatorKey,
@@ -102,6 +104,15 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 //            this.widget.builder(ModalRoute.of(context).settings.arguments)
 //      },
 //    );
+  }
+
+  main(){
+//    routes['/lock-screen'] = (context) => this._lockScreen;
+//    routes['/unlocked'] = (context) =>
+//        this.widget.builder(ModalRoute.of(context).settings.arguments);
+
+    return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+
   }
 
   Widget get _lockScreen {
@@ -163,7 +174,12 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   void _didUnlockOnAppLaunch(Object args) {
     this._didUnlockForAppLaunch = true;
-    this.widget.builder(ModalRoute.of(context).settings.arguments);
+//    this.widget.builder(ModalRoute.of(context).settings.arguments);
+    _navigatorKey.currentState.push(
+        MaterialPageRoute(
+          builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
+        )
+    );
 //    _navigatorKey.currentState
 //        .pushReplacementNamed('/unlocked', arguments: args);
   }
