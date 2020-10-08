@@ -41,7 +41,7 @@ class AppLock extends StatefulWidget {
     print("context in _AppLockState : ${context.dependOnInheritedWidgetOfExactType()}");
     print("context in findAncestorStateOfType : ${context.findAncestorStateOfType<_AppLockState>()}");
 
-    return context.dependOnInheritedWidgetOfExactType(aspect: _AppLockState);
+    return context.findAncestorStateOfType<_AppLockState>();
   }
 
 
