@@ -100,8 +100,8 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-//    return main();
-    return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+    return main();
+    //return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
 //    return MaterialApp(
 //      home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
 //      navigatorKey: _navigatorKey,
@@ -114,11 +114,11 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   }
 
   main(){
-//    routes['/lock-screen'] = (context) => this._lockScreen;
-//    routes['/unlocked'] = (context) =>
-//        this.widget.builder(ModalRoute.of(context).settings.arguments);
-
-    return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+    return Builder(
+        builder: (context){
+          return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+        }
+    );
 
   }
 
