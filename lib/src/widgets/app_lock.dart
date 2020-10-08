@@ -35,15 +35,20 @@ class AppLock extends StatefulWidget {
     this.backgroundLockLatency = const Duration(seconds: 0),
   }) : super(key: key);
 
-  static _AppLockState of(BuildContext context) =>
-      context.findAncestorStateOfType<_AppLockState>();
+//  static _AppLockState of(BuildContext context) =>
+//      context.findAncestorStateOfType<_AppLockState>();
+  static _AppLockState of(BuildContext context){
+    print("context in _AppLockState : $context");
+    return context.findAncestorStateOfType<_AppLockState>();
+  }
+
 
   @override
   _AppLockState createState() => _AppLockState();
 }
 
 class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
-  static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
+  //static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
   bool _didUnlockForAppLaunch;
   bool _isLocked;
@@ -154,6 +159,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   /// Makes sure that [AppLock] shows the [lockScreen] on subsequent app pauses.
   void enable() {
+    print("in enable appLock");
     setState(() {
       this._enabled = true;
     });
@@ -169,7 +175,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   /// Manually show the [lockScreen].
   Future<void> showLockScreen() {
     this._isLocked = true;
-    return _navigatorKey.currentState.pushNamed('/lock-screen');
+    //return _navigatorKey.currentState.pushNamed('/lock-screen');
   }
 
   void _didUnlockOnAppLaunch(Object args) {
@@ -188,6 +194,6 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   void _didUnlockOnAppPaused() {
     this._isLocked = false;
-    _navigatorKey.currentState.pop();
+    //_navigatorKey.currentState.pop();
   }
 }
