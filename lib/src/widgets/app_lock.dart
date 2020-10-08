@@ -100,8 +100,8 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return main();
-    //return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+//    return main();
+    return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
 //    return MaterialApp(
 //      home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
 //      navigatorKey: _navigatorKey,
