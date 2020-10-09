@@ -35,14 +35,14 @@ class AppLock extends StatefulWidget {
     this.backgroundLockLatency = const Duration(seconds: 0),
   }) : super(key: key);
 
-//  static _AppLockState of(BuildContext context) =>
-//      context.findAncestorStateOfType<_AppLockState>();
-  static _AppLockState of(BuildContext context){
-    print("context in _AppLockState : ${AppLock.of(context)}");
-    print("context in findAncestorStateOfType : ${context.findAncestorStateOfType<_AppLockState>()}");
-
-    return context.findAncestorStateOfType<_AppLockState>();
-  }
+  static _AppLockState of(BuildContext context) =>
+      context.findAncestorStateOfType<_AppLockState>();
+//  static _AppLockState of(BuildContext context){
+//    print("context in _AppLockState : ${AppLock.of(context)}");
+//    print("context in findAncestorStateOfType : ${context.findAncestorStateOfType<_AppLockState>()}");
+//
+//    return context.findAncestorStateOfType<_AppLockState>();
+//  }
 
 
   @override
