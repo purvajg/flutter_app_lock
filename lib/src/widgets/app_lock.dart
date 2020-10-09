@@ -66,6 +66,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
     this._didUnlockForAppLaunch = !this.widget.enabled;
     this._isLocked = false;
     this._enabled = this.widget.enabled;
+    print("enabled status : ${this._enabled}");
 
     super.initState();
   }
@@ -95,6 +96,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   void dispose() {
+    print("in dispose");
     WidgetsBinding.instance.removeObserver(this);
 
     this._backgroundLockLatencyTimer?.cancel();
@@ -106,6 +108,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
 //    return main();
     //return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
+    print("this.widget.enabled in build : ${this.widget.enabled}");
     return MaterialApp(
       home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
       navigatorKey: _navigatorKey,
