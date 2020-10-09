@@ -38,7 +38,7 @@ class AppLock extends StatefulWidget {
 //  static _AppLockState of(BuildContext context) =>
 //      context.findAncestorStateOfType<_AppLockState>();
   static _AppLockState of(BuildContext context){
-    print("context in _AppLockState : ${context.dependOnInheritedWidgetOfExactType()}");
+    print("context in _AppLockState : ${AppLock.of(context)}");
     print("context in findAncestorStateOfType : ${context.findAncestorStateOfType<_AppLockState>()}");
 
     return context.findAncestorStateOfType<_AppLockState>();
@@ -100,17 +100,17 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return main();
+//    return main();
     //return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
-//    return MaterialApp(
-//      home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
-//      navigatorKey: _navigatorKey,
+    return MaterialApp(
+      home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
+      //navigatorKey: _navigatorKey,
 //      routes: {
 //        '/lock-screen': (context) => this._lockScreen,
 //        '/unlocked': (context) =>
 //            this.widget.builder(ModalRoute.of(context).settings.arguments)
 //      },
-//    );
+    );
   }
 
   main(){
