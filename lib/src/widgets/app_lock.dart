@@ -50,7 +50,7 @@ class AppLock extends StatefulWidget {
 }
 
 class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
-  //static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
+  static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
   bool _didUnlockForAppLaunch;
   bool _isLocked;
@@ -72,12 +72,16 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("in didChangeAppLifecycleState");
     if (!this._enabled) {
+      print("in !this._enabled");
       return;
     }
 
     if (state == AppLifecycleState.paused &&
         (!this._isLocked && this._didUnlockForAppLaunch)) {
+      print("state : ${state}");
+      print("AppLifecycleState.paused : ${AppLifecycleState}");
       this._backgroundLockLatencyTimer =
           Timer(this.widget.backgroundLockLatency, () => this.showLockScreen());
     }
@@ -104,7 +108,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
     //return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
     return MaterialApp(
       home: this.widget.enabled ? this._lockScreen : this.widget.builder(null),
-      //navigatorKey: _navigatorKey,
+      navigatorKey: _navigatorKey,
 //      routes: {
 //        '/lock-screen': (context) => this._lockScreen,
 //        '/unlocked': (context) =>
@@ -177,7 +181,8 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   /// Manually show the [lockScreen].
   Future<void> showLockScreen() {
     this._isLocked = true;
-    //return _navigatorKey.currentState.pushNamed('/lock-screen');
+    print("in showLockScreen");
+    return _navigatorKey.currentState.pushNamed('/lock-screen');
   }
 
   void _didUnlockOnAppLaunch(Object args) {
@@ -196,6 +201,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   void _didUnlockOnAppPaused() {
     this._isLocked = false;
-    //_navigatorKey.currentState.pop();
+    print("in _didUnlockOnAppPaused");
+    _navigatorKey.currentState.pop();
   }
 }
