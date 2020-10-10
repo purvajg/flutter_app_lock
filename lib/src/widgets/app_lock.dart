@@ -303,25 +303,23 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return main();
-//    return MaterialApp(
-//      home:this.widget.enabled ? this._lockScreen : this.widget.builder(null),
+//    return main();
+      return Scaffold(
+      body:this.widget.enabled ? this._lockScreen : this.widget.builder(null),
 //      navigatorKey: _navigatorKey,
 //      routes: {
 //        '/lock-screen': (context) => this._lockScreen,
 //        '/unlocked': (context) =>
 //            this.widget.builder(ModalRoute.of(context).settings.arguments)
 //      },
-//    );
-  }
-
-  main(){
-    return Builder(
-        builder: (context){
-          return this.widget.enabled ? this._lockScreen : this.widget.builder(null);
-        },
     );
   }
+
+//  main(){
+//    return Listener(
+//      onPointerUp: enable(),
+//    );
+//  }
 
   Widget get _lockScreen {
     return WillPopScope(
