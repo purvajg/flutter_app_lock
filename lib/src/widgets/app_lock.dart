@@ -311,7 +311,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 //    return main();
       return Scaffold(
       body:this.widget.enabled ? this._lockScreen : this.widget.builder(null),
-      key: _navigatorKey,
+      //key: _navigatorKey,
 //      routes: {
 //        '/lock-screen': (context) => this._lockScreen,
 //        '/unlocked': (context) =>
@@ -341,15 +341,15 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   /// when built. Use this when you want to inject objects created from the
   /// [lockScreen] in to the rest of your app so you can better guarantee that some
   /// objects, services or databases are already instantiated before using them.
-  void didUnlock([Object args, BuildContext customContext]) {
+  void didUnlock([Object args, BuildContext customContext, GlobalKey<NavigatorState> navigatorKey]) {
     print("customContext in didUnlock : $customContext");
-    print("_navigatorKey.currentState in didUnlock: ${_navigatorKey.currentState}");
+    print("_navigatorKey.currentState in didUnlock: ${navigatorKey.currentState}");
     if (this._didUnlockForAppLaunch) {
-      print("_navigatorKey.currentState in didUnlock if: ${_navigatorKey.currentState}");
+      print("_navigatorKey.currentState in didUnlock if: ${navigatorKey.currentState}");
       this._didUnlockOnAppPaused();
     } else {
-      print("_navigatorKey.currentState in didUnlock else: ${_navigatorKey.currentState}");
-      this._didUnlockOnAppLaunch(args, customContext);
+      print("_navigatorKey.currentState in didUnlock else: ${navigatorKey.currentState}");
+      this._didUnlockOnAppLaunch(args, customContext, navigatorKey);
     }
   }
 
@@ -387,7 +387,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
     return _navigatorKey.currentState.pushNamed('/lock-screen');
   }
 
-  void _didUnlockOnAppLaunch(Object args, BuildContext customContext) {
+  void _didUnlockOnAppLaunch(Object args, BuildContext customContext, GlobalKey<NavigatorState> navigatorKey) {
     this._didUnlockForAppLaunch = true;
 //    this.widget.builder(ModalRoute.of(context).settings.arguments);
 //    _navigatorKey.currentState.push(
@@ -399,11 +399,11 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 //        )
 //    );
 
-    print("_navigatorKey.currentState : ${_navigatorKey.currentWidget}");
-    print("_navigatorKey.currentState : ${_navigatorKey.currentState}");
-    print("_navigatorKey.currentContext : ${_navigatorKey.currentContext}");
+    print("_navigatorKey.currentState : ${navigatorKey.currentWidget}");
+    print("_navigatorKey.currentState : ${navigatorKey.s}");
+    print("_navigatorKey.currentContext : ${navigatorKey.currentContext}");
 
-    _navigatorKey.currentState.push(
+    navigatorKey.currentState.push(
         MaterialPageRoute(
           builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
     ));
