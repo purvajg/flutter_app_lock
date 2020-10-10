@@ -271,6 +271,8 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
     this._isLocked = false;
     this._enabled = this.widget.enabled;
 
+    print("_navigatorKey.currentState in initState: ${_navigatorKey.currentState}");
+
     super.initState();
   }
 
@@ -304,6 +306,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    print("_navigatorKey.currentState in build: ${_navigatorKey.currentState}");
 //    return main();
       return Scaffold(
       body:this.widget.enabled ? this._lockScreen : this.widget.builder(null),
