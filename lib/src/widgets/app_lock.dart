@@ -389,6 +389,9 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 //        )
 //    );
 
+    print("_navigatorKey.currentState : ${_navigatorKey.currentState}");
+    print("_navigatorKey.currentContext : ${_navigatorKey.currentContext}");
+
     _navigatorKey.currentState.push(
         MaterialPageRoute(
           builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
