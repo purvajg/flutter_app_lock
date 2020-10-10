@@ -256,6 +256,7 @@ class AppLock extends StatefulWidget {
 class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
+
   bool _didUnlockForAppLaunch;
   bool _isLocked;
   bool _enabled;
@@ -337,9 +338,13 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   /// [lockScreen] in to the rest of your app so you can better guarantee that some
   /// objects, services or databases are already instantiated before using them.
   void didUnlock([Object args, BuildContext customContext]) {
+    print("customContext in didUnlock : $customContext");
+    print("_navigatorKey.currentState in didUnlock: ${_navigatorKey.currentState}");
     if (this._didUnlockForAppLaunch) {
+      print("_navigatorKey.currentState in didUnlock if: ${_navigatorKey.currentState}");
       this._didUnlockOnAppPaused();
     } else {
+      print("_navigatorKey.currentState in didUnlock else: ${_navigatorKey.currentState}");
       this._didUnlockOnAppLaunch(args, customContext);
     }
   }
@@ -390,14 +395,15 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 //    );
 
     print("_navigatorKey.currentState : ${_navigatorKey}");
+    print("_navigatorKey.currentState : ${_navigatorKey.currentState}");
     print("_navigatorKey.currentContext : ${_navigatorKey.currentContext}");
 
     _navigatorKey.currentState.push(
         MaterialPageRoute(
           builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
     ));
-//    _navigatorKey.currentState
-//        .pushReplacementNamed('/unlocked', arguments: args);
+    _navigatorKey.currentState
+        .pushReplacementNamed('/unlocked', arguments: args);
   }
 
 //  void _didUnlockOnAppLaunch(Object args) {
