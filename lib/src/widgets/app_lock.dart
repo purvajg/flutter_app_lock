@@ -336,11 +336,11 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   /// when built. Use this when you want to inject objects created from the
   /// [lockScreen] in to the rest of your app so you can better guarantee that some
   /// objects, services or databases are already instantiated before using them.
-  void didUnlock([Object args]) {
+  void didUnlock([Object args, BuildContext customContext]) {
     if (this._didUnlockForAppLaunch) {
       this._didUnlockOnAppPaused();
     } else {
-      this._didUnlockOnAppLaunch(args);
+      this._didUnlockOnAppLaunch(args, customContext);
     }
   }
 
@@ -378,24 +378,24 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
     return _navigatorKey.currentState.pushNamed('/lock-screen');
   }
 
-  void _didUnlockOnAppLaunch(Object args) {
+  void _didUnlockOnAppLaunch(Object args, BuildContext customContext) {
     this._didUnlockForAppLaunch = true;
 //    this.widget.builder(ModalRoute.of(context).settings.arguments);
 //    _navigatorKey.currentState.push(
-//    Navigator.push(
-//        context,
+    Navigator.push(
+        customContext,
+        MaterialPageRoute(
+          builder: (customContext) => this.widget.builder(ModalRoute.of(customContext).settings.arguments),//pass Name() here and pass Home()in name_screen
+        )
+    );
+
+//    print("_navigatorKey.currentState : ${_navigatorKey.currentState}");
+//    print("_navigatorKey.currentContext : ${_navigatorKey.currentContext}");
+//
+//    _navigatorKey.currentState.push(
 //        MaterialPageRoute(
 //          builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
-//        )
-//    );
-
-    print("_navigatorKey.currentState : ${_navigatorKey.currentState}");
-    print("_navigatorKey.currentContext : ${_navigatorKey.currentContext}");
-
-    _navigatorKey.currentState.push(
-        MaterialPageRoute(
-          builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
-    ));
+//    ));
 //    _navigatorKey.currentState
 //        .pushReplacementNamed('/unlocked', arguments: args);
   }
