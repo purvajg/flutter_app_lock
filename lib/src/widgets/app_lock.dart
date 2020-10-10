@@ -255,6 +255,7 @@ class AppLock extends StatefulWidget {
 
 class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
+//  static final GlobalKey<_AppLockState> _navigatorKey = GlobalKey();
 
 
   bool _didUnlockForAppLaunch;
@@ -390,21 +391,22 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
     this._didUnlockForAppLaunch = true;
 //    this.widget.builder(ModalRoute.of(context).settings.arguments);
 //    _navigatorKey.currentState.push(
-    Navigator.push(
-        customContext,
-        MaterialPageRoute(
-          builder: (customContext) => this.widget.builder(ModalRoute.of(customContext).settings.arguments),//pass Name() here and pass Home()in name_screen
-        )
-    );
 
-    print("_navigatorKey.currentState : ${_navigatorKey}");
+//    Navigator.push(
+//        customContext,
+//        MaterialPageRoute(
+//          builder: (customContext) => this.widget.builder(ModalRoute.of(customContext).settings.arguments),//pass Name() here and pass Home()in name_screen
+//        )
+//    );
+
+    print("_navigatorKey.currentState : ${_navigatorKey.currentWidget}");
     print("_navigatorKey.currentState : ${_navigatorKey.currentState}");
     print("_navigatorKey.currentContext : ${_navigatorKey.currentContext}");
 
-//    _navigatorKey.currentState.push(
-//        MaterialPageRoute(
-//          builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
-//    ));
+    _navigatorKey.currentState.push(
+        MaterialPageRoute(
+          builder: (context) => this.widget.builder(ModalRoute.of(context).settings.arguments),//pass Name() here and pass Home()in name_screen
+    ));
 //    _navigatorKey.currentState
 //        .pushReplacementNamed('/unlocked', arguments: args);
   }
