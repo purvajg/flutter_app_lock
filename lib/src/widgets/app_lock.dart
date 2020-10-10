@@ -400,7 +400,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 //    );
 
     print("_navigatorKey.currentState : ${navigatorKey.currentWidget}");
-    print("_navigatorKey.currentState : ${navigatorKey.s}");
+    print("_navigatorKey.currentState : ${navigatorKey.currentState}");
     print("_navigatorKey.currentContext : ${navigatorKey.currentContext}");
 
     navigatorKey.currentState.push(
