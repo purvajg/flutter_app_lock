@@ -10,7 +10,7 @@ void main() {
       data: args,
     ),
     lockScreen: LockScreen(),
-    enabled: false,
+    enabled: true,
     backgroundLockLatency: const Duration(seconds: 30),
   ));
 }
