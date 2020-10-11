@@ -264,6 +264,8 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   Timer _backgroundLockLatencyTimer;
 
+  Object builderArgs;
+
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -309,15 +311,20 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     print("_navigatorKey.currentState in build: ${_navigatorKey.currentState}");
 //    return main();
-      return Scaffold(
-      body:this.widget.enabled ? this._lockScreen : this.widget.builder(null),
+      return builderArgs == null ?
+      Scaffold(
+        body:this.widget.enabled ? this._lockScreen : this.widget.builder(null),
       //key: _navigatorKey,
 //      routes: {
 //        '/lock-screen': (context) => this._lockScreen,
 //        '/unlocked': (context) =>
 //            this.widget.builder(ModalRoute.of(context).settings.arguments)
 //      },
-    );
+    ):
+      Scaffold(
+        body:this.widget.builder(builderArgs),
+      );
+
   }
 
 //  main(){
@@ -389,17 +396,21 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 
   _didUnlockOnAppLaunch(Object args, BuildContext customContext, GlobalKey<NavigatorState> navigatorKey) {
     this._didUnlockForAppLaunch = true;
+
+    setState(() {
+      builderArgs = args;
+    });
 //    this.widget.builder(ModalRoute.of(context).settings.arguments);
 //    _navigatorKey.currentState.push(
 
-
-    print("_navigatorKey.currentState : ${navigatorKey.currentWidget}");
-    print("_navigatorKey.currentState : ${navigatorKey.currentState}");
-    print("_navigatorKey.currentContext : ${navigatorKey.currentContext}");
-
-        return Scaffold(
-          body: this.widget.builder(args),
-        );
+//
+//    print("_navigatorKey.currentState : ${navigatorKey.currentWidget}");
+//    print("_navigatorKey.currentState : ${navigatorKey.currentState}");
+//    print("_navigatorKey.currentContext : ${navigatorKey.currentContext}");
+//
+//        return Scaffold(
+//          body: this.widget.builder(args),
+//        );
 
 //    navigatorKey.currentState.push(
 //        MaterialPageRoute(
