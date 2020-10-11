@@ -391,7 +391,12 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
   /// Manually show the [lockScreen].
   Future<void> showLockScreen() {
     this._isLocked = true;
-    return _navigatorKey.currentState.pushNamed('/lock-screen');
+
+    setState(() {
+      builderArgs = null;
+      this._enabled = true;
+    });
+//    return _navigatorKey.currentState.pushNamed('/lock-screen');
   }
 
   _didUnlockOnAppLaunch(Object args, BuildContext customContext, GlobalKey<NavigatorState> navigatorKey) {
@@ -427,6 +432,7 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
 //  }
 
   void _didUnlockOnAppPaused() {
+    print("in _didUnlockOnAppPaused");
     this._isLocked = false;
     Navigator.pop(context);
 //    _navigatorKey.currentState.pop();
