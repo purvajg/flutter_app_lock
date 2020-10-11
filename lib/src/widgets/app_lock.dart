@@ -397,13 +397,9 @@ class _AppLockState extends State<AppLock> with WidgetsBindingObserver {
     print("_navigatorKey.currentState : ${navigatorKey.currentState}");
     print("_navigatorKey.currentContext : ${navigatorKey.currentContext}");
 
-    return Builder(
-      builder: (context,) {
         return Scaffold(
           body: this.widget.builder(args),
         );
-      }
-    );
 
 //    navigatorKey.currentState.push(
 //        MaterialPageRoute(
